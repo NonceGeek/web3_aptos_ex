@@ -158,7 +158,7 @@ Generated web3_aptos_ex app
 
 ## 0x01 Description
 
-Move(Aptos/Starcoin/Sui) SDK impl in elixir!
+Aptos SDK impl in elixir!
 
 See the using example in:
 
@@ -170,13 +170,7 @@ See the using example in:
   * [x] RPC Implementation
   * [x] Read Resource
   * [x] Send Transaction
-* [x] Starcoin
-  * [x] Readonly Function
-  * [x] Read Resource
-  * [x] Send Transaction
-  * [x] Deploy Contract
   * [x] Chain Interactor
-* [ ] Sui
 
 ## 0x03 Installation
 
