@@ -17,7 +17,7 @@ defmodule Web3AptosEx.MixProject do
     [
       files: ["lib", "mix.exs", "README.livemd"],
       maintainers: ["leeduckgo"],
-      licenses: ["Apache 2.0"],
+      licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/NonceGeek/web3_aptos_ex"}
     ]
   end
