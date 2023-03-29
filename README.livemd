@@ -9,7 +9,7 @@
 > * hello_blockchain: [0xcd6e69ff3c22db037584fb1650f7ca75df721fb0143690fb33f2f3bd0c1fe5bd](https://explorer.aptoslabs.com/account/0xcd6e69ff3c22db037584fb1650f7ca75df721fb0143690fb33f2f3bd0c1fe5bd/modules)
 
 ```elixir
-Mix.install([:poison, :jason, {:web3_move_ex, "~> 0.4.0"}])
+Mix.install([:poison, :jason, {:web3_aptos_ex, "~> 1.0.0"}])
 ```
 
 <!-- livebook:{"output":true} -->
@@ -38,10 +38,10 @@ New:
   telemetry 0.4.3
   tesla 1.5.0
   unicode_util_compat 0.7.0
-  web3_move_ex 0.2.0
+  web3_aptos_ex 0.2.0
 * Getting poison (Hex package)
 * Getting jason (Hex package)
-* Getting web3_move_ex (Hex package)
+* Getting web3_aptos_ex (Hex package)
 * Getting bcs (Hex package)
 * Getting binary (Hex package)
 * Getting ex_struct_translator (Hex package)
@@ -145,9 +145,9 @@ warning: unused import Bitwise
   lib/tesla/middleware/retry.ex:51
 
 Generated tesla app
-==> web3_move_ex
+==> web3_aptos_ex
 Compiling 39 files (.ex)
-Generated web3_move_ex app
+Generated web3_aptos_ex app
 ```
 
 <!-- livebook:{"output":true} -->
@@ -181,32 +181,32 @@ See the using example in:
 ## 0x03 Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `web3_move_ex` to your list of dependencies in `mix.exs`:
+by adding `web3_aptos_ex` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:web3_move_ex, "~> 0.4.0"}
+    {:web3_aptos_ex, "~> 1.0.0"}
   ]
 end
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/web3_move_ex](https://hexdocs.pm/web3_move_ex).
+be found at [https://hexdocs.pm/web3_aptos_ex](https://hexdocs.pm/web3_aptos_ex).
 
 ## 0x04 Aptos
 
-**Namespace:** Web3MoveEx.Aptos
+**Namespace:** Web3AptosEx.Aptos
 
 <!-- livebook:{"break_markdown":true} -->
 
 ### 4.1 Create a Connect
 
 ```elixir
-import Web3MoveEx.Aptos
+import Web3AptosEx.Aptos
 
-alias Web3MoveEx.Aptos
+alias Web3AptosEx.Aptos
 
 {:ok, client} = Aptos.RPC.connect("https://fullnode.testnet.aptoslabs.com/v1")
 
@@ -216,7 +216,7 @@ client
 <!-- livebook:{"output":true} -->
 
 ```
-%Web3MoveEx.Aptos.RPC{
+%Web3AptosEx.Aptos.RPC{
   endpoint: "https://fullnode.testnet.aptoslabs.com/v1",
   client: %Tesla.Client{
     fun: nil,
@@ -236,7 +236,7 @@ client
 Aptos using the Ed25519 Algorithm for the Account.
 
 ```elixir
-priv = Web3MoveEx.Crypto.generate_priv()
+priv = Web3AptosEx.Crypto.generate_priv()
 {:ok, account} = Aptos.Account.from_private_key(priv)
 account
 ```
@@ -336,7 +336,7 @@ Aptos.RPC.get_resources(client, "0x3")
 #### 4.3.2 Read resource by resource_type
 
 ```elixir
-Web3MoveEx.Aptos.RPC.get_resource(client, "0x3", "0x1::account::Account")
+Web3AptosEx.Aptos.RPC.get_resource(client, "0x3", "0x1::account::Account")
 ```
 
 <!-- livebook:{"output":true} -->
@@ -364,7 +364,7 @@ Web3MoveEx.Aptos.RPC.get_resource(client, "0x3", "0x1::account::Account")
 > https://explorer.aptoslabs.com/account/0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed/resources
 
 ```elixir
-Web3MoveEx.Aptos.RPC.get_table_item(
+Web3AptosEx.Aptos.RPC.get_table_item(
   client,
   "0xe30b2ff6a515aa04729522512d50147d5cdd52ee3741c26ff1b97306b0b2b148",
   "0x1::string::String",
@@ -426,4 +426,4 @@ Please write unit test with your code if necessary.
 
 ## 0x08 License
 
-web3_move_ex is available as open source under the terms of the [MIT License](./LICENSE.md).
+web3_aptos_ex is available as open source under the terms of the [MIT License](./LICENSE.md).
