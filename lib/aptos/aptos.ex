@@ -120,6 +120,8 @@ defmodule Web3AptosEx.Aptos do
   defdelegate get_resources(client, address, query \\ []), to: RPC
   defdelegate get_resource(client, address, resource_type), to: RPC
   defdelegate build_resource_path(client, address, resource_type), to: RPC
+  defdelegate get_table_item(client, table_handle, table_key), to: RPC
+  defdelegate get_table_item(client, table_handle, key_type, value_type, key), to: RPC
 
   # +-----+
   # | Txs |
