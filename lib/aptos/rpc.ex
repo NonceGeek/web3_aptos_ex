@@ -184,15 +184,15 @@ defmodule Web3AptosEx.Aptos.RPC do
   end
 
   # Events
-  def get_events(client, acct, event_handle, field, query \\ [limit: 10]) do
-    case get(client, "/accounts/#{acct.address_hex}/events/#{event_handle}/#{field}", query: query) do
+  def get_events(client, address, event_handle, field, query \\ [limit: 10]) do
+    case get(client, "/accounts/#{address}/events/#{event_handle}/#{field}", query: query) do
       {:ok, event_list} -> {:ok, event_list}
       {:error, %{error_code: "resource_not_found"}} -> {:ok, []}
     end
   end
 
-  def build_event_path(%{endpoint: endpoint}, acct, event_handle, field) do
-    "#{endpoint}/accounts/#{acct.address_hex}/events/#{event_handle}/#{field}"
+  def build_event_path(%{endpoint: endpoint}, address, event_handle, field) do
+    "#{endpoint}/accounts/#{address}/events/#{event_handle}/#{field}"
   end
 
   @doc """
