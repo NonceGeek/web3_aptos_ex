@@ -227,7 +227,7 @@ defmodule Web3AptosEx.Aptos.RPC do
     get_table_item(client, table_handle, payload)
   end
 
-  def get_table_item(client, table_handle, table_key) do
+  defp get_table_item(client, table_handle, table_key) do
     post(client, "/tables/#{table_handle}/item", table_key)
   end
 
