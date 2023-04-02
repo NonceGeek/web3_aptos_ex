@@ -109,7 +109,6 @@ defmodule Web3AptosEx.Aptos do
   # | Events |
   # +--------+
 
-  defdelegate get_events(client, event_key), to: RPC
   defdelegate get_events(client, address, event_handle, field, query \\ [limit: 10]), to: RPC
   defdelegate build_event_path(client, address, event_handle, field), to: RPC
 
