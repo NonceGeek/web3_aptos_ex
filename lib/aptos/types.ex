@@ -57,15 +57,22 @@ defmodule Web3AptosEx.Aptos.Types do
     end
   end
 
+  def encode_arg(list, {:vector, :address}) do
+    list_updated = Enum.map(list, fn elem ->
+      {:ok, addr} = Web3AptosEx.Aptos.Types.Address.new(elem)
+      addr
+    end)
+    {:ok, Bcs.encode(list_updated, unwrap_vector_type({:vector, :address}))}
+  end
   def encode_arg(list, {:vector, inner_type}) do
     {:ok, Bcs.encode(list, unwrap_vector_type({:vector, inner_type}))}
   end
 
-  defp unwrap_vector_type({:vector, inner_type}) do
+  def unwrap_vector_type({:vector, inner_type}) do
     [unwrap_vector_type(inner_type)]
   end
 
-  defp unwrap_vector_type(type) do
+  def unwrap_vector_type(type) do
     type
   end
 end

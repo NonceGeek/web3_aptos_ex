@@ -81,13 +81,53 @@ defmodule Web3AptosEx.Aptos do
     {:ok, acct_ol} = load_account(client, acct)
     submit_txn(client, acct_ol, payload, options)
   end
-  def submit_txn(client, acct, payload, options \\ []) do
 
+  # +----------------------+
+  # | buidl and submit txn |
+  # +----------------------+
+
+  def submit_txn(client, acct, payload, options \\ []) do
     raw_txn =
       Web3AptosEx.Aptos.Transaction.make_raw_txn(acct, client.chain_id, payload, options)
 
     signed_txn = Web3AptosEx.Aptos.Transaction.sign_ed25519(raw_txn, acct.signing_key)
     Web3AptosEx.Aptos.RPC.submit_bcs_transaction(client, signed_txn)
+  end
+
+  @doc """
+    if there is no type_args
+  """
+  def call_func(client, acct, contract_addr, module_name, func_name, args, arg_types) do
+    call_func(
+      client,
+      acct,
+      contract_addr,
+      module_name,
+      func_name,
+      args,
+      arg_types,
+      [])
+  end
+
+  @doc """
+    if there is type_args, such as:
+    > f = ~a"0x1::coin::transfer<CoinType>(address,u64)"f
+    > payload = Aptos.call_function(f, ["0x1::aptos_coin::AptosCoin"], [account.address, 100])
+  """
+  def call_func(client,
+    acct,
+    contract_addr,
+    module_name,
+    func_name,
+    args,
+    arg_types,
+    type_args) do
+    {:ok, f} = gen_func(contract_addr, module_name, func_name, arg_types)
+    payload = call_function(f, type_args, args)
+    {:ok, %{hash: hash} = tx} = submit_txn_with_auto_acct_updating(client, acct, payload)
+    Process.sleep(2000)  # 用 2 秒等待交易成功
+    res = check_tx_res_by_hash(client, hash)
+    %{res: res, tx: tx}
   end
 
   def call_function(func, type_args, args) do
