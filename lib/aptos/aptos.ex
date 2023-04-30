@@ -2,7 +2,7 @@ defmodule Web3AptosEx.Aptos do
   @moduledoc false
 
   import Web3AptosEx.Aptos.Helpers
-  alias Web3AptosEx.Aptos.{RPC, Account, Parser}
+  alias Web3AptosEx.Aptos.{RPC, Account, Parser, Transaction}
   alias Web3AptosEx.Crypto
   alias Web3AptosEx.ModuleHandler.Aptos.Coin
 
@@ -88,10 +88,10 @@ defmodule Web3AptosEx.Aptos do
 
   def submit_txn(client, acct, payload, options \\ []) do
     raw_txn =
-      Web3AptosEx.Aptos.Transaction.make_raw_txn(acct, client.chain_id, payload, options)
+      Transaction.make_raw_txn(acct, client.chain_id, payload, options)
 
-    signed_txn = Web3AptosEx.Aptos.Transaction.sign_ed25519(raw_txn, acct.signing_key)
-    Web3AptosEx.Aptos.RPC.submit_bcs_transaction(client, signed_txn)
+    signed_txn = Transaction.sign_ed25519(raw_txn, acct.signing_key)
+    RPC.submit_bcs_transaction(client, signed_txn)
   end
 
   @doc """
@@ -143,6 +143,21 @@ defmodule Web3AptosEx.Aptos do
       type_args,
       encoded_args
     )
+  end
+
+  def gen_func(contract_addr, module_name, func_name, arg_types) do
+    types = arg_types_to_arg_string(arg_types)
+    init_func_str = "#{contract_addr}::#{module_name}::#{func_name}(#{types})"
+    ~a"#{init_func_str}"
+  end
+
+  def arg_types_to_arg_string(arg_types) do
+    arg_types_reduce_first_ele = Enum.drop(arg_types, 1)
+    Enum.reduce(
+      arg_types_reduce_first_ele,
+      Enum.at(arg_types, 0),
+      fn x, acc -> "#{acc}, #{x}"
+    end)
   end
 
   # +--------+
