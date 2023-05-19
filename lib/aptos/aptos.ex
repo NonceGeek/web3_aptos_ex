@@ -38,7 +38,7 @@ defmodule Web3AptosEx.Aptos do
 
   def generate_keys(priv), do: Account.from_private_key(priv)
   def get_balance(client, account), do: APT.get_coin_store(client, account)
-
+  defdelegate transfer(client, acct, to, amount), to: APT
   def get_faucet(%{endpoint: endpoint}, account, amount \\ 100000000) do
     cond do
       String.contains?(endpoint, "testnet") ->

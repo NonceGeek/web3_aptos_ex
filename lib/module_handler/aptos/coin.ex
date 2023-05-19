@@ -21,8 +21,9 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.Coin.APT do
   end
 
   def transfer(client, acct, to, amount) do
-    f = ~a"0x1::coin::transfer<CoinType>(address, u64)"
-    {:ok, payload} = Aptos.call_function(f, ["0x1::aptos_coin::AptosCoin"], [to, amount])
+    {:ok, f} = ~a"0x1::coin::transfer<CoinType>(address, u64)"
+    payload = Aptos.call_function(f, ["0x1::aptos_coin::AptosCoin"], [to, amount])
     Aptos.submit_txn(client, acct, payload)
   end
+  
 end
