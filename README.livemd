@@ -390,7 +390,7 @@ Web3AptosEx.Aptos.RPC.get_table_item(
 
 ```elixir
 # Call function
-f = ~A"0x1::coin::transfer<CoinType>(address,u64)"f
+f = ~a"0x1::coin::transfer<CoinType>(address,u64)"
 
 payload = Aptos.call_function(f, ["0x1::aptos_coin::AptosCoin"], [account.address, 100])
 

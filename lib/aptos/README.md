@@ -13,9 +13,9 @@ alias Web3AptosEx.Aptos
 {:ok, account} = Aptos.load_account(rpc, account)
 
 # Call function
-f = ~A"0x1::coin::transfer<CoinType>(address,u64)"f
+f = ~a"0x1::coin::transfer<CoinType>(address,u64)"
 
-payload = Aptos.call_function(f, ["0x1::aptos_coin::AptosCoin"], [account.address, 100])
+payload = Aptos.call_function(f, ["0x1::aptos_coin::AptosCoin"], [to, 100])
 
 Aptos.submit_txn(rpc, account, payload)
 ```

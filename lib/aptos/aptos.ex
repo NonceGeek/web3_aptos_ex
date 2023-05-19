@@ -111,7 +111,7 @@ defmodule Web3AptosEx.Aptos do
 
   @doc """
     if there is type_args, such as:
-    > f = ~a"0x1::coin::transfer<CoinType>(address,u64)"f
+    > f = ~a"0x1::coin::transfer<CoinType>(address,u64)"
     > payload = Aptos.call_function(f, ["0x1::aptos_coin::AptosCoin"], [account.address, 100])
   """
   def call_func(client,
