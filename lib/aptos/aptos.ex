@@ -4,7 +4,7 @@ defmodule Web3AptosEx.Aptos do
   import Web3AptosEx.Aptos.Helpers
   alias Web3AptosEx.Aptos.{RPC, Account, Parser, Transaction}
   alias Web3AptosEx.Crypto
-  alias Web3AptosEx.ModuleHandler.Aptos.Coin
+  alias Web3AptosEx.ModuleHandler.Aptos.Coin.APT
 
   @doc """
     `~a"0x1::coin::transfer<CoinType>(address,u64)"`
@@ -37,7 +37,7 @@ defmodule Web3AptosEx.Aptos do
   end
 
   def generate_keys(priv), do: Account.from_private_key(priv)
-  def get_balance(client, account), do: Coin.get_coin_store(client, account)
+  def get_balance(client, account), do: APT.get_coin_store(client, account)
 
   def get_faucet(%{endpoint: endpoint}, account, amount \\ 100000000) do
     cond do
