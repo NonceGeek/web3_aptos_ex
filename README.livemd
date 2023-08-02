@@ -421,3 +421,16 @@ Please write unit test with your code if necessary.
 ## 0x08 License
 
 web3_aptos_ex is available as open source under the terms of the [MIT License](./LICENSE.md).
+
+## 0x09 Distributed Rules
+<!-- distributed_rules -->
+
+Contributors:
+
+```
+pool, 20%
+https://github.com/leeduckgo, 40%
+https://github.com/zven21, 40%
+```
+
+<!-- / distributed_rules -->
