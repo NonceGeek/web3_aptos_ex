@@ -1,5 +1,5 @@
 %{
-  "bcs": {:hex, :bcs, "0.1.0", "0047d5b1defd98cc52b218ccc41226e46c43f30b6b5290864b507539bedcb66d", [:mix], [], "hexpm", "bd29dde6f2d88cf278b5cf457f1d2d83474dceb9c9c9265af9dd79cc24f1c392"},
+  "bcs": {:hex, :bcs, "0.3.0", "4db46f0391cfb5068858e7529ac25170a9945c6e4d2b8d194fdd1cc29d8d5c60", [:mix], [], "hexpm", "29ba05d58b27964a5719b8dec5c5e8d23663592a8b02142bf16fbee34ce73dee"},
   "binary": {:hex, :binary, "0.0.5", "20d816f7274ea34f1b673b4cff2fdb9ebec9391a7a68c349070d515c66b1b2cf", [:mix], [], "hexpm", "ee1e9ebcab703a4e24db554957fbb540642fe9327eb9e295cb3f07dd7c11ddb2"},
   "bunt": {:hex, :bunt, "0.2.1", "e2d4792f7bc0ced7583ab54922808919518d0e57ee162901a16a1b6664ef3b14", [:mix], [], "hexpm", "a330bfb4245239787b15005e66ae6845c9cd524a288f0d141c148b02603777a5"},
   "certifi": {:hex, :certifi, "2.9.0", "6f2a475689dd47f19fb74334859d460a2dc4e3252a3324bd2111b8f0429e7e21", [:rebar3], [], "hexpm", "266da46bdb06d6c6d35fde799bcb28d36d985d424ad7c08b5bb48f5b5cdd4641"},

@@ -31,12 +31,14 @@ defmodule Web3AptosEx.Aptos do
 
   defdelegate connect, to: RPC
   defdelegate connect(endpoint), to: RPC
+
   def generate_keys() do
     priv = Crypto.generate_priv()
     Account.from_private_key(priv)
   end
 
   def generate_keys(priv), do: Account.from_private_key(priv)
+
   def get_balance(client, account), do: APT.get_coin_store(client, account)
   defdelegate transfer(client, acct, to, amount), to: APT
   def get_faucet(%{endpoint: endpoint}, account, amount \\ 100000000) do
@@ -128,6 +130,17 @@ defmodule Web3AptosEx.Aptos do
     Process.sleep(2000)  # 用 2 秒等待交易成功
     res = check_tx_res_by_hash(client, hash)
     %{res: res, tx: tx}
+  end
+
+  def call_view_func(client, func, type_args, args) do
+    {:ok, binary_res} = RPC.view_function(client, func, type_args, args)
+    type = Binary.take(binary_res, 2) # TODO: check type
+    case type do
+      <<1, 62>> -> # :string
+      binary_res |> Binary.drop(2) |>  Bcs.decode(:string)
+      <<1, 8>> -> # :u64
+      binary_res |> Binary.drop(2) |>  Bcs.decode(:u64)
+    end
   end
 
   def call_function(func, type_args, args) do

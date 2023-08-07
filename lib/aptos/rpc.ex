@@ -230,6 +230,22 @@ defmodule Web3AptosEx.Aptos.RPC do
     )
   end
 
+  def view_function(client, func, type_args, args) do
+    body = 
+    %{
+      function: func,
+      "type_arguments": type_args,
+      "arguments": args
+    }
+
+    post(client, "/view", body,
+      headers: [
+        {"Accept", "application/json, application/x-bcs"},
+        {"Content-Type", "application/json"}
+      ]
+    )
+  end
+
   def get_faucet(client, address, amount \\ 100000000) do
     post(client, "/mint?amount=#{amount}&address=#{address}", "")
   end
