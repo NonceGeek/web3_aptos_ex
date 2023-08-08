@@ -240,7 +240,7 @@ defmodule Web3AptosEx.Aptos.RPC do
 
     post(client, "/view", body,
       headers: [
-        {"Accept", "application/json, application/x-bcs"},
+        # {"Accept", "application/json, application/x-bcs"},
         {"Content-Type", "application/json"}
       ]
     )

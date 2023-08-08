@@ -133,14 +133,8 @@ defmodule Web3AptosEx.Aptos do
   end
 
   def call_view_func(client, func, type_args, args) do
-    {:ok, binary_res} = RPC.view_function(client, func, type_args, args)
-    type = Binary.take(binary_res, 2) # TODO: check type
-    case type do
-      <<1, 62>> -> # :string
-      binary_res |> Binary.drop(2) |>  Bcs.decode(:string)
-      <<1, 8>> -> # :u64
-      binary_res |> Binary.drop(2) |>  Bcs.decode(:u64)
-    end
+    {:ok, [res]} = RPC.view_function(client, func, type_args, args)
+    {:ok, res}
   end
 
   def call_function(func, type_args, args) do
