@@ -2,11 +2,25 @@
 
 # Web3AptosEx
 
-## Preparation
+## 0x00 Description
 
 ![](files/logo_web3_aptos_ex.png)
 
-<!-- livebook:{"break_markdown":true} -->
+Aptos SDK impl in elixir!
+
+See the using example in:
+
+> https://github.com/NonceGeek/move_sdk_ex_liveview_example
+
+## 0x01 Implementation
+
+* [x] Aptos
+  * [x] RPC Implementation
+  * [x] Read Resource
+  * [x] Send Transaction
+  * [x] Chain Interactor
+
+## 0x02 Preparation
 
 > Test Smart Contract Lists:
 > 
@@ -15,22 +29,6 @@
 ```elixir
 Mix.install([:poison, :jason, {:web3_aptos_ex, "~> 1.1.6"}])
 ```
-
-## 0x01 Description
-
-Aptos SDK impl in elixir!
-
-See the using example in:
-
-> https://github.com/NonceGeek/move_sdk_ex_liveview_example
-
-## 0x02 Implementation
-
-* [x] Aptos
-  * [x] RPC Implementation
-  * [x] Read Resource
-  * [x] Send Transaction
-  * [x] Chain Interactor
 
 ## 0x03 Installation
 
