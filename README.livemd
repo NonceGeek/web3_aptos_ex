@@ -1,8 +1,12 @@
-<!-- livebook:{"persist_outputs":true} -->
+<!-- livebook:{"file_entries":[{"name":"logo_web3_aptos_ex.png","type":"attachment"}],"persist_outputs":true} -->
 
 # Web3AptosEx
 
-## Section
+## Preparation
+
+![](files/logo_web3_aptos_ex.png)
+
+<!-- livebook:{"break_markdown":true} -->
 
 > Test Smart Contract Lists:
 > 
@@ -10,150 +14,6 @@
 
 ```elixir
 Mix.install([:poison, :jason, {:web3_aptos_ex, "~> 1.1.6"}])
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-Resolving Hex dependencies...
-Resolution completed in 3.304s
-New:
-  bcs 0.1.0
-  binary 0.0.5
-  certifi 2.9.0
-  decimal 2.0.0
-  ecto 3.4.6
-  ex_struct_translator 0.1.1
-  hackney 1.18.1
-  httpoison 1.8.2
-  idna 6.1.1
-  jason 1.4.0
-  metrics 1.0.2
-  mime 2.0.3
-  mimerl 1.2.0
-  nimble_parsec 1.2.3
-  parse_trans 3.3.1
-  poison 3.1.0
-  ssl_verify_fun 1.1.6
-  telemetry 0.4.3
-  tesla 1.5.0
-  unicode_util_compat 0.7.0
-  web3_aptos_ex 0.2.0
-* Getting poison (Hex package)
-* Getting jason (Hex package)
-* Getting web3_aptos_ex (Hex package)
-* Getting bcs (Hex package)
-* Getting binary (Hex package)
-* Getting ex_struct_translator (Hex package)
-* Getting hackney (Hex package)
-* Getting httpoison (Hex package)
-* Getting nimble_parsec (Hex package)
-* Getting tesla (Hex package)
-* Getting mime (Hex package)
-* Getting certifi (Hex package)
-* Getting idna (Hex package)
-* Getting metrics (Hex package)
-* Getting mimerl (Hex package)
-* Getting parse_trans (Hex package)
-* Getting ssl_verify_fun (Hex package)
-* Getting unicode_util_compat (Hex package)
-* Getting ecto (Hex package)
-* Getting decimal (Hex package)
-* Getting telemetry (Hex package)
-===> Analyzing applications...
-===> Compiling parse_trans
-===> Analyzing applications...
-===> Compiling mimerl
-==> nimble_parsec
-Compiling 4 files (.ex)
-Generated nimble_parsec app
-===> Analyzing applications...
-===> Compiling metrics
-===> Analyzing applications...
-===> Compiling unicode_util_compat
-===> Analyzing applications...
-===> Compiling idna
-===> Analyzing applications...
-===> Compiling telemetry
-==> binary
-Compiling 2 files (.ex)
-Generated binary app
-==> decimal
-Compiling 4 files (.ex)
-Generated decimal app
-warning: String.strip/1 is deprecated. Use String.trim/1 instead
-  /Users/liaohua/Library/Caches/mix/installs/elixir-1.14.2-erts-11.2.2.3/e76e2beadba340d20f5f78500f2b5c84/deps/poison/mix.exs:4: Poison.Mixfile
-
-==> poison
-Compiling 4 files (.ex)
-warning: Application.get_env/2 is discouraged in the module body, use Application.compile_env/3 instead
-  lib/poison/parser.ex:22: Poison.Parser
-
-warning: use Bitwise is deprecated. import Bitwise instead
-  lib/poison/parser.ex:26: Poison.Parser
-
-warning: use Bitwise is deprecated. import Bitwise instead
-  lib/poison/encoder.ex:83: Poison.Encoder.BitString
-
-warning: Integer.to_char_list/2 is deprecated. Use Integer.to_charlist/2 instead
-  lib/poison/encoder.ex:173: Poison.Encoder.BitString.seq/1
-
-Generated poison app
-==> jason
-Compiling 10 files (.ex)
-Generated jason app
-==> ssl_verify_fun
-Compiling 7 files (.erl)
-Generated ssl_verify_fun app
-==> bcs
-Compiling 4 files (.ex)
-Generated bcs app
-===> Analyzing applications...
-===> Compiling certifi
-===> Analyzing applications...
-===> Compiling hackney
-==> httpoison
-Compiling 3 files (.ex)
-Generated httpoison app
-==> ecto
-Compiling 55 files (.ex)
-warning: atom ::: must be written between quotes, as in :"::", to avoid ambiguity
-  lib/ecto/query/builder.ex:246:8
-
-warning: Decimal.cmp/2 is deprecated. Use compare/2 instead
-  lib/ecto/changeset.ex:2149: Ecto.Changeset.validate_number/6
-
-warning: Macro.to_string/2 is deprecated. Use Macro.to_string/1 instead
-  lib/ecto/query/inspect.ex:225: Inspect.Ecto.Query.expr/3
-
-Generated ecto app
-==> ex_struct_translator
-Compiling 1 file (.ex)
-Generated ex_struct_translator app
-==> mime
-Compiling 1 file (.ex)
-Generated mime app
-==> tesla
-Compiling 30 files (.ex)
-warning: Application.get_env/3 is discouraged in the module body, use Application.compile_env/3 instead
-  lib/tesla/middleware/telemetry.ex:83: Tesla.Middleware.Telemetry
-
-warning: Application.get_env/3 is discouraged in the module body, use Application.compile_env/3 instead
-  lib/tesla/middleware/logger.ex:185: Tesla.Middleware.Logger
-
-warning: unused import Bitwise
-  lib/tesla/middleware/retry.ex:51
-
-Generated tesla app
-==> web3_aptos_ex
-Compiling 39 files (.ex)
-Generated web3_aptos_ex app
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-:ok
 ```
 
 ## 0x01 Description
@@ -423,6 +283,7 @@ Please write unit test with your code if necessary.
 web3_aptos_ex is available as open source under the terms of the [MIT License](./LICENSE.md).
 
 ## 0x09 Distributed Rules
+
 <!-- distributed_rules -->
 
 Contributors:
