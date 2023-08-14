@@ -52,10 +52,26 @@ defmodule Web3AptosEx.SmartMoveParseTest do
            '       weapon_type: String,',
            '       weight: u64,',
            '}'
+         ],
+         event: [
+           '#[view]',
+           'struct WeaponEvent has key {',
+           '       attack: u64,',
+           '       gem: Option<Object<Gem>>,',
+           '       weapon_type: String,',
+           '       weight: u64,',
+           '}'
          ]
        ]},
       """
           struct WeaponEvent has key {
+             attack: u64,
+             gem: Option<Object<Gem>>,
+             weapon_type: String,
+             weight: u64,
+         }
+         #[view]
+      struct WeaponEvent has key {
              attack: u64,
              gem: Option<Object<Gem>>,
              weapon_type: String,
