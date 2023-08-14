@@ -37,7 +37,8 @@ parse_result({Name, Values}) ->
   {Name, Values}.
 
 struct_to_event(StructLine, Values) ->
-  case re:run(StructLine, "Event", []) of
+  [_, Name | _] = binary:split(erlang:list_to_binary(StructLine), <<" ">>),
+  case re:run(Name, "Event", []) of
       {match, _} ->
          {event, Values};
        _->
@@ -222,7 +223,7 @@ yecctoken2string1(Other) ->
 
 
 
--file("src/smart_move_yecc.erl", 225).
+-file("src/smart_move_yecc.erl", 226).
 
 -dialyzer({nowarn_function, yeccpars2/7}).
 -compile({nowarn_unused_function,  yeccpars2/7}).
@@ -1148,4 +1149,4 @@ yeccpars2_47_(__Stack0) ->
   end | __Stack].
 
 
--file("src/smart_move_yecc.yrl", 87).
+-file("src/smart_move_yecc.yrl", 88).

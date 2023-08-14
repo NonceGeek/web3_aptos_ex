@@ -1,7 +1,7 @@
 defmodule Web3AptosEx.Aptos.SmartContractParser do
     import NimbleParsec
     import NimbleJson.Parser.Helper
-  
+
 
     @doc """
     TODO: Parse the Move Smart Contract.
@@ -111,22 +111,30 @@ defmodule Web3AptosEx.Aptos.SmartContractParser do
 }
     """
     def parse_code(contract_code) do
-        parse(contract_code)
+        {:ok, tokens, _} = :smart_move_leex.string(String.to_charlist(contract_code))
+        :smart_move_yecc.parse(tokens)
+    end
+    def parse_struct(contract_code) do
+        do_parse(:struct, contract_code)
+    end
+    def parse_event(contract_code) do
+         do_parse(:event, contract_code)
+    end
+    def parse_fun(contract_code) do
+        do_parse(:function, contract_code)
+    end
+    defp do_parse(name, conttrace_code) do
+        {:ok, l} = parse_code(conttrace_code)
+        l |> Enum.filter(&(match(name,&1)))
+          |> Enum.map(&(add_new_line(:erlang.element(2, &1))))
+    end
+    defp match(name,{name, _}) do
+         true
+    end
+    defp match(_, _) do
+         false
+    end
+    defp add_new_line(lines) do
+        :erlang.list_to_binary(lines |> Enum.map(&(&1++'\n')))
     end
 end
-
-# inputs = [
-#   "<foo>bar</foo>",
-#   "<foo><bar>baz</bar></foo>",
-#   "<foo><bar>one</bar><bar>two</bar></foo>",
-#   "<>bar</>",
-#   "<foo>bar</baz>",
-#   "<foo>bar</foo>oops",
-#   "<foo>bar"
-# ]
-
-# for input <- inputs do
-#   IO.puts(input)
-#   IO.inspect(SimpleXML.parse(input))
-#   IO.puts("")
-# end

@@ -79,7 +79,8 @@ parse_result({Name, Values}) ->
   {Name, Values}.
 
 struct_to_event(StructLine, Values) ->
-  case re:run(StructLine, "Event", []) of
+  [_, Name | _] = binary:split(erlang:list_to_binary(StructLine), <<" ">>),
+  case re:run(Name, "Event", []) of
       {match, _} ->
          {event, Values};
        _->

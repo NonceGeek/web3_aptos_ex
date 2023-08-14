@@ -2,8 +2,24 @@ defmodule Web3AptosEx.SmartMoveParseTest do
   @moduledoc false
   use ExUnit.Case, async: true
 
+  test "test parse function " do
+    assert [
+             "#[view]\npublic fun get_message(addr: address): string::String acquires MessageHolder {\n        assert!(exists<MessageHolder>(addr), error::not_found(ENO_MESSAGE));\n        borrow_global<MessageHolder>(addr).message\n}\n",
+             "public entry fun set_message(account: signer, message: string::String)\n    acquires MessageHolder {\n        let account_addr = signer::address_of(&account);\n        if (!exists<MessageHolder>(account_addr)) {\n            move_to(&account, MessageHolder {                message,                message_change_events: account::new_event_handle<MessageChangeEvent>(&account),})\n        } else {\n            let old_message_holder = borrow_global_mut<MessageHolder>(account_addr);\n            let from_message = old_message_holder.message;\n            event::emit_event(&mut old_message_holder.message_change_events, MessageChangeEvent {                from_message,                to_message: copy message,});\n            old_message_holder.message = message;\n}\n}\n",
+             "#[test(account = @0x1)]\npublic entry fun sender_can_set_message(account: signer) acquires MessageHolder {\n        let addr = signer::address_of(&account);\n        aptos_framework::account::create_account_for_test(addr);\n        set_message(account,  string::utf8(b\"Hello, Blockchain\"));\n        assert!(\n          get_message(addr) == string::utf8(b\"Hello, Blockchain\"),\n          ENO_MESSAGE\n        );\n}\n"
+           ] ==
+             Web3AptosEx.Aptos.SmartContractParser.parse_fun(move_file_content())
+
+    assert [
+             "struct MessageChangeEvent has drop, store {\n        from_message: string::String,\n        to_message: string::String,\n}\n"
+           ] == Web3AptosEx.Aptos.SmartContractParser.parse_event(move_file_content())
+
+    assert [
+             "struct MessageHolder has key {\n        message: string::String,\n        message_change_events: event::EventHandle<MessageChangeEvent>,\n}\n"
+           ] == Web3AptosEx.Aptos.SmartContractParser.parse_struct(move_file_content())
+  end
+
   test "test parse smart move" do
-    content = move_file_content()
     # parse struct
     check_parse(
       {:ok,
@@ -747,7 +763,7 @@ defmodule Web3AptosEx.SmartMoveParseTest do
          ],
          module_end: ['}']
        ]},
-      aptos_hero
+      aptos_hero()
     )
 
     check_parse(
@@ -820,7 +836,7 @@ defmodule Web3AptosEx.SmartMoveParseTest do
          ],
          module_end: ['}']
        ]},
-      move_file_content
+      move_file_content()
     )
 
     check_parse(
@@ -880,7 +896,7 @@ defmodule Web3AptosEx.SmartMoveParseTest do
          ],
          module_end: ['}']
        ]},
-      local_compo
+      local_compo()
     )
 
     check_parse(
@@ -916,7 +932,7 @@ defmodule Web3AptosEx.SmartMoveParseTest do
   defp check_parse(expect, str) do
     {:ok, tokens, _} = :smart_move_leex.string(String.to_charlist(str))
     # IO.puts(" ===>>>> #{inspect(tokens)}", limit: :infinity)
-    IO.inspect(tokens, limit: :infinity)
+    # IO.inspect(tokens, limit: :infinity)
     res = :smart_move_yecc.parse(tokens)
     # IO.inspect(res, limit: :infinity)
     assert expect == res
