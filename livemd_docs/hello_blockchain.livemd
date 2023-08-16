@@ -1,7 +1,7 @@
 # Hello Blockchain
 
 ```elixir
-Mix.install([:poison, :jason, {:web3_move_ex, "~> 0.2.0"}])
+Mix.install([:poison, :jason, {:web3_move_ex, "~> 1.2.1"}])
 ```
 
 ## 0x00 Main Code

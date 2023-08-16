@@ -7,7 +7,7 @@ defmodule Web3AptosEx.MixProject do
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      version: "1.1.6",
+      version: "1.2.1",
       description: "cool sdk for Aptos Blockchain.",
       package: package()
     ]
@@ -43,7 +43,9 @@ defmodule Web3AptosEx.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:binary, "~> 0.0.5"},
       {:nimble_parsec, "~> 1.2"},
-      {:bcs, "~> 0.3.0"},
+
+
+      {:bcs, "~> 0.1.0"},
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.17"},
       {:rename_project, "~> 0.1.0", only: :dev},
