@@ -650,8 +650,8 @@ Contributors:
 
 ```
 pool, 20%
-https://github.com/leeduckgo, 40%
-https://github.com/zven21, 40%
+https://github.com/leeduckgo, 30%
+https://github.com/zven21, 50%
 ```
 
 <!-- / distributed_rules -->
