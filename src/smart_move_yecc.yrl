@@ -47,7 +47,7 @@ rbrace_res -> rbrace: '$1'.
 rbrace_res -> rbrace_semicolon: '$1'.
 Erlang code.
 
-value_of({_,_, V}) -> V;
+value_of({_,_, V}) -> unicode:characters_to_binary(V);
 value_of(V) -> V.
 
 add(struct, A) ->
@@ -71,15 +71,15 @@ add(Name, A,  Others, C) ->
  Vc = value_of(C),
  {Name,  [Va | Others] ++ [Vc]}.
 
-parse_result({struct, ["struct" ++ _ = StructLine |_ ] = Values}) ->
+parse_result({struct, [<<"struct",StructLine/binary>> |_ ] = Values}) ->
   struct_to_event(StructLine, Values);
-parse_result({struct, [_, "struct" ++ _ = StructLine |_ ] = Values}) ->
+parse_result({struct, [_, <<"struct", _/binary>> = StructLine |_ ] = Values}) ->
   struct_to_event(StructLine, Values);
 parse_result({Name, Values}) ->
   {Name, Values}.
 
 struct_to_event(StructLine, Values) ->
-  [_, Name | _] = binary:split(erlang:list_to_binary(StructLine), <<" ">>),
+  [_, Name | _] = binary:split(erlang:iolist_to_binary(StructLine), <<" ">>),
   case re:run(Name, "Event", []) of
       {match, _} ->
          {event, Values};
