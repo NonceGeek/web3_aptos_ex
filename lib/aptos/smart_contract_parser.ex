@@ -135,6 +135,6 @@ defmodule Web3AptosEx.Aptos.SmartContractParser do
          false
     end
     defp add_new_line(lines) do
-        :erlang.list_to_binary(lines |> Enum.map(&(&1++'\n')))
+        :erlang.list_to_binary(lines |> Enum.map(&("#{&1}\n")))
     end
 end
