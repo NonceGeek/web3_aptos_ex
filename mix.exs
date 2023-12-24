@@ -7,7 +7,7 @@ defmodule Web3AptosEx.MixProject do
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      version: "1.2.1",
+      version: "1.3.0",
       description: "cool sdk for Aptos Blockchain.",
       package: package()
     ]
@@ -15,7 +15,7 @@ defmodule Web3AptosEx.MixProject do
 
   defp package do
     [
-      files: ["lib", "mix.exs", "README.livemd"],
+      files: ["lib", "mix.exs", "README.livemd", "src", "livemd_docs"],
       maintainers: ["leeduckgo"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/NonceGeek/web3_aptos_ex"}

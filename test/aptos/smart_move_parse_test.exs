@@ -930,7 +930,7 @@ defmodule Web3AptosEx.SmartMoveParseTest do
   end
 
   defp check_parse(expect, str) do
-    {:ok, tokens, _} = :smart_move_leex.string(String.to_charlist(str))
+    {:ok, tokens, _} = :smart_move_leex.string(String.to_charlist(a))
     # IO.puts(" ===>>>> #{inspect(tokens)}", limit: :infinity)
     # IO.inspect(tokens, limit: :infinity)
     res = :smart_move_yecc.parse(tokens)

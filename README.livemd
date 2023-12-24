@@ -1,4 +1,4 @@
-<!-- livebook:{"file_entries":[{"name":"logo_web3_aptos_ex.png","type":"attachment"},{"name":"web3_aptos_ex.png","type":"attachment"}],"persist_outputs":true} -->
+<!-- livebook:{"default_language":"erlang","file_entries":[{"name":"logo_web3_aptos_ex.png","type":"attachment"},{"name":"web3_aptos_ex.png","type":"attachment"}],"persist_outputs":true} -->
 
 # Web3AptosEx
 
@@ -38,9 +38,9 @@ Mix.install([:poison, :jason, {:web3_aptos_ex, "~>1.2.1"}])
 
 ```
 Resolving Hex dependencies...
-Resolution completed in 1.267s
+Resolution completed in 0.717s
 New:
-  bcs 0.3.0
+  bcs 0.1.0
   binary 0.0.5
   certifi 2.9.0
   decimal 2.1.1
@@ -61,7 +61,7 @@ New:
   telemetry 0.4.3
   tesla 1.7.0
   unicode_util_compat 0.7.0
-  web3_aptos_ex 1.2.0
+  web3_aptos_ex 1.2.1
 * Getting poison (Hex package)
 * Getting jason (Hex package)
 * Getting web3_aptos_ex (Hex package)
@@ -106,7 +106,7 @@ Generated binary app
 Compiling 4 files (.ex)
 Generated decimal app
 warning: String.strip/1 is deprecated. Use String.trim/1 instead
-  /Users/rockyrocky/Library/Caches/mix/installs/elixir-1.14.2-erts-12.3.2.13/3979bf609d6e87502f29f68d742fa7ae/deps/poison/mix.exs:4: Poison.Mixfile
+  /Users/rockyrocky/Library/Caches/mix/installs/elixir-1.14.2-erts-12.3.2.13/c4103cbb0a905116c36a4b63e9875c40/deps/poison/mix.exs:4: Poison.Mixfile
 
 ==> poison
 Compiling 4 files (.ex)
@@ -139,7 +139,7 @@ Generated json app
 Compiling 7 files (.erl)
 Generated ssl_verify_fun app
 ==> bcs
-Compiling 5 files (.ex)
+Compiling 4 files (.ex)
 Generated bcs app
 ===> Analyzing applications...
 ===> Compiling certifi
@@ -171,12 +171,6 @@ Compiling 34 files (.ex)
 Generated tesla app
 ==> web3_aptos_ex
 Compiling 26 files (.ex)
-warning: found quoted keyword "type_arguments" but the quotes are not required. Note that keywords are always atoms, even when quoted. Similar to atoms, keywords made exclusively of ASCII letters, numbers, and underscores and not beginning with a number do not require quotes
-  lib/aptos/rpc.ex:237:8
-
-warning: found quoted keyword "arguments" but the quotes are not required. Note that keywords are always atoms, even when quoted. Similar to atoms, keywords made exclusively of ASCII letters, numbers, and underscores and not beginning with a number do not require quotes
-  lib/aptos/rpc.ex:238:8
-
 warning: outdented heredoc line. The contents inside the heredoc should be indented at the same level as the closing """. The following is forbidden:
 
     def text do
@@ -195,6 +189,12 @@ Instead make sure the contents are indented as much as the heredoc closing:
 
 The current heredoc line is indented too little
   lib/aptos/smart_contract_parser.ex:60:10
+
+warning: found quoted keyword "type_arguments" but the quotes are not required. Note that keywords are always atoms, even when quoted. Similar to atoms, keywords made exclusively of ASCII letters, numbers, and underscores and not beginning with a number do not require quotes
+  lib/aptos/rpc.ex:237:8
+
+warning: found quoted keyword "arguments" but the quotes are not required. Note that keywords are always atoms, even when quoted. Similar to atoms, keywords made exclusively of ASCII letters, numbers, and underscores and not beginning with a number do not require quotes
+  lib/aptos/rpc.ex:238:8
 
 defp cmd__0(rest, acc, stack, context, line, offset) do
   cmd__4(rest, [], [{rest, context, line, offset}, acc | stack], context, line, offset)
@@ -400,7 +400,7 @@ client
 
 ```
 
-21:16:45.528 [warn] Description: 'Authenticity is not established by certificate path validation'
+21:46:26.003 [warn] Description: 'Authenticity is not established by certificate path validation'
      Reason: 'Option {verify, verify_peer} and cacertfile/cacerts is missing'
 
 
@@ -437,7 +437,7 @@ account
 <!-- livebook:{"output":true} -->
 
 ```
-#Account<0x167b31b898ccf223e9ebcd7dee7ee6ea241aef1fbb7f7a96294ab6f492df12d6>
+#Account<0x508eb8b479f6661348f0180c2e7ef83c548ee89aabadc9232b488308182bb8dd>
 ```
 
 ```elixir
@@ -451,7 +451,17 @@ account_ol
 <!-- livebook:{"output":true} -->
 
 ```
-#Account<0x167b31b898ccf223e9ebcd7dee7ee6ea241aef1fbb7f7a96294ab6f492df12d6>
+
+21:46:26.358 [warn] Description: 'Authenticity is not established by certificate path validation'
+     Reason: 'Option {verify, verify_peer} and cacertfile/cacerts is missing'
+
+
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Account<0x508eb8b479f6661348f0180c2e7ef83c548ee89aabadc9232b488308182bb8dd>
 ```
 
 ### 4.3 Read Resource of Acct
@@ -460,16 +470,6 @@ account_ol
 
 ```elixir
 Aptos.RPC.get_resources(client, "0x3")
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-
-21:24:10.831 [warn] Description: 'Authenticity is not established by certificate path validation'
-     Reason: 'Option {verify, verify_peer} and cacertfile/cacerts is missing'
-
-
 ```
 
 <!-- livebook:{"output":true} -->
@@ -608,20 +608,55 @@ Web3AptosEx.Aptos.RPC.get_table_item(
 ```elixir
 {:ok, f} = ~a"0x1::coin::transfer<CoinType>(address, u64)"
 payload = Aptos.call_function(f, ["0x1::aptos_coin::AptosCoin"], [account_ol.address, 100])
-payload
+Aptos.submit_txn_with_auto_acct_updating(client, account_ol, payload)
 ```
 
 <!-- livebook:{"output":true} -->
 
 ```
-%Web3AptosEx.Aptos.Types.TransactionPayload.EntryFunction{
-  address: <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 1>>,
-  module: "coin",
-  function: "transfer",
-  type_args: [struct: 0x1::aptos_coin::AptosCoin],
-  args: [:error, <<100, 0, 0, 0, 0, 0, 0, 0>>]
-}
+
+21:48:50.442 [warn] Description: 'Authenticity is not established by certificate path validation'
+     Reason: 'Option {verify, verify_peer} and cacertfile/cacerts is missing'
+
+
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+{:ok,
+ %{
+   expiration_timestamp_secs: "1692193790",
+   gas_unit_price: "1000",
+   hash: "0xe574135a727ae366740e08247dcbd925c05cc931212dda5ed241bc5633703ed6",
+   max_gas_amount: "2000",
+   payload: %{
+     arguments: ["0x508eb8b479f6661348f0180c2e7ef83c548ee89aabadc9232b488308182bb8dd", "100"],
+     function: "0x1::coin::transfer",
+     type: "entry_function_payload",
+     type_arguments: ["0x1::aptos_coin::AptosCoin"]
+   },
+   sender: "0x508eb8b479f6661348f0180c2e7ef83c548ee89aabadc9232b488308182bb8dd",
+   sequence_number: "0",
+   signature: %{
+     public_key: "0xce70449765f180af68a038adf1c9893e72897ef579b7b138855fe8daaa4be438",
+     signature: "0xea8cd7270fb59b3e55332dc2f6f06cc6fb53bf361abda011f3235c40b715dd592c9cfc84c12057f14fa5be1cb0143d0924633db36f6ce45b11398875044de20a",
+     type: "ed25519_signature"
+   }
+ }}
+```
+
+### 4.5 Smart Contract Code Parser
+
+Parse the smart contract code, it is the  basis for generating call-codes for mutiple langugage, and the embedding for the smart contract to vector dataset!
+
+> https://ai.movedid.build/
+
+```erlang
+# TODO: make it run in livebook
+payload = " module hello_blockchain::message {\n            use std::error;\n            use std::signer;\n            use std::string;\n            use aptos_framework::account;\n            use aptos_framework::event;\n\n        //:!:>resource\n            struct MessageHolder has key {\n                message: string::String,\n                message_change_events: event::EventHandle<MessageChangeEvent>,\n            }\n        //<:!:resource\n\n            struct MessageChangeEvent has drop, store {\n                from_message: string::String,\n                to_message: string::String,\n            }\n\n            /// There is no message present\n            const ENO_MESSAGE: u64 = 0;\n\n            #[view]\n            public fun get_message(addr: address): string::String acquires MessageHolder {\n                assert!(exists<MessageHolder>(addr), error::not_found(ENO_MESSAGE));\n                borrow_global<MessageHolder>(addr).message\n            }\n\n            public entry fun set_message(account: signer, message: string::String)\n            acquires MessageHolder {\n                let account_addr = signer::address_of(&account);\n                if (!exists<MessageHolder>(account_addr)) {\n                    move_to(&account, MessageHolder {\n                        message,\n                        message_change_events: account::new_event_handle<MessageChangeEvent>(&account),\n                    })\n                } else {\n                    let old_message_holder = borrow_global_mut<MessageHolder>(account_addr);\n                    let from_message = old_message_holder.message;\n                    event::emit_event(&mut old_message_holder.message_change_events, MessageChangeEvent {\n                        from_message,\n                        to_message: copy message,\n                    });\n                    old_message_holder.message = message;\n                }\n            }\n\n            #[test(account = @0x1)]\n            public entry fun sender_can_set_message(account: signer) acquires MessageHolder {\n                let addr = signer::address_of(&account);\n                aptos_framework::account::create_account_for_test(addr);\n                set_message(account,  string::utf8(b\"Hello, Blockchain\"));\n\n                assert!(\n                get_message(addr) == string::utf8(b\"Hello, Blockchain\"),\n                ENO_MESSAGE\n                );\n            }\n        }"
+{:ok, tokens, _} = :smart_move_leex.string(String.to_charlist(payload))
+:smart_move_yecc.parse(tokens)
 ```
 
 ## 0x06 Contributing
