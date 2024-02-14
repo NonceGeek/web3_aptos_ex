@@ -42,7 +42,7 @@ defmodule Web3AptosEx.Aptos.Transaction do
     if is_nil(account.auth_key), do: throw(:missing_auth_key)
     if is_nil(account.sequence_number), do: throw(:missing_sequence_number)
 
-    max_gas_amount = options[:max_gas_amount] || 2000
+    max_gas_amount = options[:max_gas_amount] || 200
     gas_unit_price = options[:gas_unit_price] || 1000
 
     expiration_timestamp_secs =
