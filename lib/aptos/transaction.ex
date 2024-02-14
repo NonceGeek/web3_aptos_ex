@@ -47,7 +47,7 @@ defmodule Web3AptosEx.Aptos.Transaction do
 
     expiration_timestamp_secs =
       options[:expiration_timestamp_secs] ||
-        Access.get(options, :expire_in_secs, 60) + System.system_time(:second)
+        Access.get(options, :expire_in_secs, 60) + System.system_time(:second) + 3600
 
     tagged_payload =
       case payload do
