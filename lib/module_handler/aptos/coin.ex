@@ -19,7 +19,7 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.Coin.APT do
     end
   end
 
-    def transfer(client, acct, to, amount, options) do
+    def transfer(client, acct, to, amount, options \\ []) do
     {:ok, f} = ~a"0x1::aptos_account::transfer(address, u64)"
     payload = Aptos.call_function(f, [], [to, amount])
     Aptos.submit_txn_with_auto_acct_updating(client, acct, payload, options)

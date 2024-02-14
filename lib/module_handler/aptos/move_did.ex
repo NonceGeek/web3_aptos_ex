@@ -12,7 +12,7 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.MoveDID do
     const ADDR_AGGREGATOR_TYPE_ORG: u64 = 1;
     const ADDR_AGGREGATOR_TYPE_ROBOT: u64 = 2;
   """
-  def init(client, acct, type, description, options) do
+  def init(client, acct, type, description, options \\ []) do
     {:ok, f} = ~a"#{@basic_path}::init::init(u64, string)"
     payload = Aptos.call_function(f, [], [type, description])
     Aptos.submit_txn_with_auto_acct_updating(client, acct, payload, options)
@@ -39,7 +39,7 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.MoveDID do
     const ADDR_TYPE_ETH: u64 = 0;
     const ADDR_TYPE_APTOS: u64 = 1;
   """
-  def add_addr(client, acct, addr_type, addr, pubkey, chains, description, spec_fields, expired_at, options) do
+  def add_addr(client, acct, addr_type, addr, pubkey, chains, description, spec_fields, expired_at, options \\ []) do
     {:ok, f} = ~a"#{@basic_path}::addr_aggregator::add_addr(u64, string, string, vector<string>, string, string, u64)"
     payload = Aptos.call_function(f, [], [addr_type, addr, pubkey, chains, description, spec_fields, expired_at])
     Aptos.submit_txn_with_auto_acct_updating(client, acct, payload, options)
