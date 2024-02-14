@@ -2,7 +2,6 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.Coin.APT do
   @moduledoc """
     0x1::coin
   """
-  # alias Web3AptosEx.Aptos
   alias Web3AptosEx.Aptos.RPC
   import Web3AptosEx.Aptos
   alias Web3AptosEx.Aptos
@@ -23,7 +22,7 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.Coin.APT do
     def transfer(client, acct, to, amount) do
     {:ok, f} = ~a"0x1::aptos_account::transfer(address, u64)"
     payload = Aptos.call_function(f, [], [to, amount])
-    Aptos.submit_txn(client, acct, payload)
+    Aptos.submit_txn_with_auto_acct_updating(client, acct, payload)
   end
   
 
