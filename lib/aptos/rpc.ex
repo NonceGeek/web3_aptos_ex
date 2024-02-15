@@ -11,12 +11,14 @@ defmodule Web3AptosEx.Aptos.RPC do
   @endpoint %{
       mainnet: "https://fullnode.mainnet.aptoslabs.com/v1",
       testnet: "https://fullnode.testnet.aptoslabs.com/v1",
-      devnet: "https://fullnode.devnet.aptoslabs.com/v1"
+      devnet: "https://fullnode.devnet.aptoslabs.com/v1",
+      randomnet: "https://fullnode.random.aptoslabs.com/v1"
     }
 
   @faucet %{
     testnet: "https://faucet.testnet.aptoslabs.com",
-    devnet: "https://faucet.devnet.aptoslabs.com"
+    devnet: "https://faucet.devnet.aptoslabs.com",
+    randomnet: "https://faucet.random.aptoslabs.com"
   }
 
   @doc """
@@ -90,6 +92,10 @@ defmodule Web3AptosEx.Aptos.RPC do
 
   def connect(:mainnet) do
     connect(@endpoint.mainnet)
+  end
+
+  def connect(:randomnet) do
+    connect(@endpoint.randomnet)
   end
 
   def connect(endpoint) do
