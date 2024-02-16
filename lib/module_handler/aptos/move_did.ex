@@ -67,7 +67,44 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.MoveDID do
   end
 
   @doc """
-    
+    public entry fun add_service(
+            acct: &signer,
+            name: String,
+            description: String,
+            url: String,
+            verification_url: String,
+            spec_fields: String,
+            expired_at: u64
+        )
+  """
+  def add_service(
+    client, 
+    acct, 
+    name, 
+    description, 
+    url,
+    verification_url, 
+    spec_fields, 
+    expired_at,
+    options \\ []
+    ) do
+
+        {:ok, f} =
+        ~a"#{@basic_path}::service_aggregator::add_service(string, string, string, string, string, u64)"
+  
+      payload =
+        Aptos.call_function(f, [], [
+            name, 
+            description, 
+            url,
+            verification_url, 
+            spec_fields, 
+            expired_at
+        ])
+  
+      Aptos.submit_txn_with_auto_acct_updating(client, acct, payload, options) 
+    end
+  @doc """
     public entry fun add_addr(
         acct: &signer,
         addr_type: u64,
