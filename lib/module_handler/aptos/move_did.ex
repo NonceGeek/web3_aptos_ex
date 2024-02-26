@@ -105,7 +105,7 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.MoveDID do
   end
 
   def init_addr_bitcoin_verificated_offline(client, acct, options \\ []) do
-    {:ok, f} = ~a"#{@basic_path}::addr_bitcoin_verificated_offline::init(u64, string)"
+    {:ok, f} = ~a"#{@basic_path}::addr_bitcoin_verificated_offline::init()"
     payload = Aptos.call_function(f, [], [])
     Aptos.submit_txn_with_auto_acct_updating(client, acct, payload, options)
   end
