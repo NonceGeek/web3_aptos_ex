@@ -55,6 +55,61 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.MoveDID do
   # +-------+
   # | Funcs |
   # +-------+
+
+  @doc """
+    public entry fun add_addr_without_0x(
+        acct: &signer,
+        addr_type: u64,
+        addr: String,
+        pubkey: String,
+        chains: vector<String>,
+        description: String,
+        spec_fields: String,
+        expired_at: u64
+    ) acquires AddrAggregator {
+        let send_addr = signer::address_of(acct);
+        let addr_aggr = borrow_global_mut<AddrAggregator>(send_addr);
+
+        do_add_addr(addr_aggr, send_addr, addr_type, addr, pubkey, chains, description, spec_fields, expired_at);
+    }
+
+    const ADDR_TYPE_BTC: u64 = 3;
+  """
+  def add_addr_without_0x(
+        client,
+        acct,
+        addr_type,
+        addr,
+        pubkey,
+        chains,
+        description,
+        spec_fields,
+        expired_at,
+        options \\ []
+      ) do
+    {:ok, f} =
+      ~a"#{@basic_path}::addr_aggregator::add_addr_without_0x(u64, string, string, vector<string>, string, string, u64)"
+
+    payload =
+      Aptos.call_function(f, [], [
+        addr_type,
+        addr,
+        pubkey,
+        chains,
+        description,
+        spec_fields,
+        expired_at
+      ])
+
+    Aptos.submit_txn_with_auto_acct_updating(client, acct, payload, options)
+  end
+
+  def init_addr_bitcoin_verificated_offline(client, acct, options \\ []) do
+    {:ok, f} = ~a"#{@basic_path}::addr_bitcoin_verificated_offline::init(u64, string)"
+    payload = Aptos.call_function(f, [], [])
+    Aptos.submit_txn_with_auto_acct_updating(client, acct, payload, options)
+  end
+
   @doc """
     const ADDR_AGGREGATOR_TYPE_HUMAN: u64 = 0;
     const ADDR_AGGREGATOR_TYPE_ORG: u64 = 1;
