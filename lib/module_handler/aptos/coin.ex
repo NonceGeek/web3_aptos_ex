@@ -28,7 +28,7 @@ defmodule Web3AptosEx.ModuleHandler.Aptos.Coin do
   def register(client, acct, coin_resource, options \\ []) do
     {:ok, f} = ~a"0x1::managed_coin::register<CoinType>()"
     payload = Aptos.call_function(f, ["#{coin_resource}"], [])
-    Aptos.submit_txn_with_auto_acct_updating(client, acct, payload,, options)
+    Aptos.submit_txn_with_auto_acct_updating(client, acct, payload, options)
   end
   
 end
