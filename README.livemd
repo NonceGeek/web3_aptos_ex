@@ -61,7 +61,7 @@ New:
   telemetry 0.4.3
   tesla 1.7.0
   unicode_util_compat 0.7.0
-  web3_aptos_ex 1.4.1
+  web3_aptos_ex 1.4.2
 * Getting poison (Hex package)
 * Getting jason (Hex package)
 * Getting web3_aptos_ex (Hex package)
@@ -369,7 +369,7 @@ by adding `web3_aptos_ex` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:web3_aptos_ex, "~> 1.4.1"}
+    {:web3_aptos_ex, "~> 1.4.2"}
   ]
 end
 ```
