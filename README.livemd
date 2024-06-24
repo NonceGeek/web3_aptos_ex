@@ -1,6 +1,7 @@
 <!-- livebook:{"default_language":"erlang","file_entries":[{"name":"logo_web3_aptos_ex.png","type":"attachment"},{"name":"web3_aptos_ex.png","type":"attachment"}],"persist_outputs":true} -->
 
 # Web3AptosEx
+[![Run in Livebook](https://livebook.dev/badge/v1/pink.svg)](https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2FNonceGeek%2Fweb3_aptos_ex%2Fblob%2Fmain%2FREADME.livemd)
 
 ## 0x00 Description
 
